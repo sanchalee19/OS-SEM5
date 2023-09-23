@@ -1,135 +1,143 @@
 clear
 while [ 1 ]
 do
-        echo 1.Create 2.Display 3.Insert 4.Search 5.Modify 6. Delete 7.Exit
-        echo Enter choice=\c
+        echo "1.Create\n2.Display\n3.Insert\n4.Search\n5.Modify\n6.Delete\n7.Exit\n"
+        echo "Enter choice=\c"
         read choice
+
         case $choice in
+
                 1)
-                        echo Enter file name :
+                        echo -n "Enter file name : "
                         read fname
+
                         if [ -e $fname ]
                         then
-                                echo File already exists
+                                echo File exists already        
                         else
                                 >> $fname
-                                echo File created successfully
+                        echo File Created Successfully
                         fi
-                        ;;
+                ;;
                 2)
-                        echo Enter file name : 
+                        echo -n "Enter File Name : "
                         read fname
+
                         if [ -e $fname ]
                         then
-                                echo The content of the file:
+                                echo "Contents of file are : \n"
                                 sort -n $fname
                         else
-                                echo File does not exist
+                                echo "File Does not Exist"
                         fi
-                        ;;
+                ;;
                 3)
-                        echo Enter the file name 
+                        echo -n "Enter File Name : "
                         read fname
+
                         if [ -e $fname ]
                         then
-                                echo Enter the roll no:
+                                echo -n "Enter Roll Number : "
                                 read roll
-                                grep -w "roll" $fname
+                                grep -w "$roll" $fname
                                 ans=$?
                                 echo answer=$ans
                                 if [ $ans -eq 0 ]
                                 then
-                                        echo Record already present
+                                        echo "Record Already Present"
                                 else
-                                        echo -n Enter name:
+                                        echo -n "Enter Name : "
                                         read name
                                         echo $roll $name >> $fname
-                                        echo Record inserted successfully
+                                        echo "Record INserted Successfully"
                                 fi
-                        else
-                                echo File does not exists
-                        fi
-                        ;;
-                4) echo -n "enter file name:"
-                        read fname
-                        if [ -e $fname ]
-                        then
-                                echo -n "enter roll no:"
-                                read roll
-                                grep -w "$roll" $fname
-                                ans=$?
-                                if [ $ans -eq 0 ]
-                                then
-                                        echo "record found"
                                 else
-                                        echo "record not found"
-                                fi
-                        else
-                                echo"file not exists"
+                                        echo "File Not Exists"
                         fi
-                        ;;
-                5)
-                        echo -n "enter file name:"
+                ;;
+                4)
+                        echo -n "Enter file name : "
                         read fname
                         if [ -e $fname ]
                         then
-                                echo -n "enter roll no:"
+                                echo -n "Enter Roll No : "
                                 read roll
                                 grep -w "$roll" $fname
                                 ans=$?
                                 if [ $ans -eq 0 ]
                                 then
-                                        echo -n "Enter new roll and new name:"
+                                        echo "Record Found"
+                                else
+                                        echo "Record not found"
+                                fi
+                        else
+                                echo "File not Exists"
+                        fi
+                ;;
+                5)
+                        echo -n "Enter file name : "
+                        read fname
+                        if [ -e $fname ]
+                        then
+                                echo -n "Enter Roll no : "
+                                read roll
+                                grep -w "$roll" $fname
+                                ans=$?
+                                if [ $ans -eq 0 ]
+                                then
+                                        echo -n "Enter new roll and new name : "
                                         read newRoll newName
                                         grep -w "$newRoll" $fname
                                         ans=$?
                                         if [ $ans -eq 0 ]
                                         then
-                                                echo "record already present try another roll no"
+                                                echo "Record already present try another roll no : "
                                         else
                                                 grep -v "$roll" $fname >> temp
-                                               echo "$newRoll $newName" >> temp
-                                       rm $fname
-                        cp temp $fname
-         rm temp
-echo "Record modified successfully"
-                                        fi
-                                else
-                                        echo "record not present"
+                                                echo "$newRoll $newName" >> temp
+                                                rm $fname
+                                                cp temp $fname
+                                                rm temp
+                                                echo "Record Modified Successfully"
                                 fi
                         else
-                                echo "file not exists"
+                                echo "Record not present"
                         fi
-                        ;;
+                else
+                        echo "File not exists"
+                        fi
+                ;;
+                6)
+                        echo -n "Enter file name : "
+                        read $fname
+                        if [ -e $fname ]
+                        then
+                                echo -n "Enter roll no : "
+                                read roll
+                                grep -w "$roll" $fname
+                                ans=$?
+                                if [ $ans -eq 0 ]
+                                then
+                                        grep -v "$roll" $fname >> temp
+                                        rm $fname
+                                        cp temp $fname
+                                        rm temp
+                                        echo "Record Successfully Deleted"
+                                else
+                                        echo "Record doesnt exist"
+                        fi
+                        else
+                                echo "File not exists"
+                        fi
+                ;;
 
-6) echo -n "enter file name:"
-read $fname
-if [ -e $fname ]
-then
-        echo -n "enter roll no"
-read roll
-grep -w "$roll" $fname
-ans=$?
-if [ $ans -eq 0 ]
-then
-        grep -v "$roll" $fname >> temp
-        rm $fname
-        cp temp $fname
-        rm temp
-        echo "record successfully deleted"
-else
-        echo "record dosent exist"
-fi
-else
-        echo "file not exists"
-fi
-;;
-7)exit
-        ;;
-
-
-
-                *) echo Choice incorrect 
-                        ;;
+                7)
+                        exit
+                ;;
+                *)
+                        echo "Invalid Choice"
+                ;;
         esac
+
 done
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   43,3-24       Bot
