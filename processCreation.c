@@ -6,13 +6,6 @@
 #include<sys/wait.h>
 #include <stdbool.h>
 
-void swap(int* xp, int* yp)
-{
-    int temp = *xp;
-    *xp = *yp;
-    *yp = temp;
-}
-
 void ascending(int *arr, int n)
 {
          
